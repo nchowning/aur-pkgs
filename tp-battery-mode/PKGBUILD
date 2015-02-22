@@ -1,18 +1,19 @@
 # Maintainer: Nathan Chowning <nathan@chowning.me>
 
 pkgname=tp-battery-mode
-pkgver=1.0
+pkgver=1.1
 pkgrel=1
-pkgdesc="Module to manage the battery mode (lifetime/runtime) of your Thinkpad using tpacpi-bat"
+pkgdesc="Module to manage the battery mode (lifetime/runtime) of your Thinkpad"
 url="https://github.com/nchowning/tp-battery-mode"
 arch=('x86_64' 'i686')
 license=('GPL3')
 depends=('tpacpi-bat')
 source=(https://github.com/nchowning/${pkgname}/archive/v${pkgver}.tar.gz)
-sha512sums=('9ab386c405b20f660ad82c5ed0adad7e6e1b2105eddabed3074d50929d3268eb6b630a7e3f9884944555397baacaa5e99591ac36cb50331486cf3e16989b46e6')
+sha512sums=('dc8779f63b3493ee32be72625c9f1cb0b50869c6f78ec8691e41bb4da96b98dda19617bc217bfe59091797e1dca7a11c7f55ba15ebee25ddb9de6f9522aa5044')
 
 package() {
     cd "$srcdir/${pkgname}-${pkgver}"
     install -Dm755 "${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
-    install -Dm644 "${pkgname}.service" "$pkgdir/usr/lib/systemd/system/${pkgname}.service"
+    install -Dm644 "${pkgname}.conf" "${pkgdir}/etc/${pkgname}.conf"
+    install -Dm644 "${pkgname}.service" "${pkgdir}/usr/lib/systemd/system/${pkgname}.service"
 }
